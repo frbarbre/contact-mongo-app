@@ -36,6 +36,27 @@ services:
       timeout: 5s
       retries: 5
 
+  react_router_v7_contacts:
+    build:
+      context: ./react-router-v7
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - API_URL=http://node:8000
+      - PORT=3000
+      - HOST=0.0.0.0
+    env_file:
+      - ./react-router-v7/.env
+    networks:
+      - contacts_network
+    volumes:
+      - ./react-router-v7:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      mongodb_contacts:
+        condition: service_healthy
+
 volumes:
   mongodb_contacts_data:
 

@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: {{app_url}}/contacts/search?q=john
+  url: {{app_url}}/api/contacts/search?q=doe
   body: none
   auth: none
-} 
+}
+
+params:query {
+  q: doe
+}
