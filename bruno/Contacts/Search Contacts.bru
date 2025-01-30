@@ -1,11 +1,11 @@
 meta {
-  name: Get Comment By ID
+  name: Search Contacts
   type: http
   seq: 2
 }
 
 get {
-  url: {{app_url}}/comments/1
+  url: {{app_url}}/contacts/search?q=john
   body: none
   auth: none
 } 

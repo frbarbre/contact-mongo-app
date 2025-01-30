@@ -1,0 +1,20 @@
+meta {
+  name: Update Contact
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{app_url}}/contacts/65b12345c6789a0123456789
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "avatar": "https://example.com/new-avatar.jpg",
+    "first": "John",
+    "last": "Smith",
+    "twitter": "@johnsmith"
+  }
+} 

@@ -1,24 +1,24 @@
 services:
   node:
     build:
-      context: .
+      context: ./node
       dockerfile: Dockerfile.dev
     ports:
       - "8000:8000"
     env_file:
-      - .env
+      - ./node/.env
     depends_on:
-      mongodb:
+      mongodb_contacts:
         condition: service_healthy
     networks:
-      - app_network
+      - contacts_network
     volumes:
-      - .:/usr/src/app
+      - ./node:/usr/src/app
       - /usr/src/app/node_modules
 
-  mongodb:
+  mongodb_contacts:
     image: mongo:latest
-    container_name: mongodb
+    container_name: mongodb_contacts
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
@@ -27,9 +27,9 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
+      - mongodb_contacts_data:/data/db
     networks:
-      - app_network
+      - contacts_network
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
@@ -37,8 +37,8 @@ services:
       retries: 5
 
 volumes:
-  mongodb_data:
+  mongodb_contacts_data:
 
 networks:
-  app_network:
+  contacts_network:
     driver: bridge
