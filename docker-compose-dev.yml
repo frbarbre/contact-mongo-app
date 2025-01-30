@@ -1,5 +1,5 @@
 services:
-  node:
+  node_contacts:
     build:
       context: ./node
       dockerfile: Dockerfile.dev
@@ -43,7 +43,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - API_URL=http://node:8000
+      - API_URL=http://node_contacts:8000
       - PORT=3000
       - HOST=0.0.0.0
     env_file:
