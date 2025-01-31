@@ -36,9 +36,9 @@ services:
       timeout: 5s
       retries: 5
 
-  react_router_v7_contacts:
+  remix_contacts:
     build:
-      context: ./react-router-v7
+      context: ./remix
       dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
@@ -47,11 +47,11 @@ services:
       - PORT=3000
       - HOST=0.0.0.0
     env_file:
-      - ./react-router-v7/.env
+      - ./remix/.env
     networks:
       - contacts_network
     volumes:
-      - ./react-router-v7:/usr/src/app
+      - ./remix:/usr/src/app
       - /usr/src/app/node_modules
     depends_on:
       mongodb_contacts:
